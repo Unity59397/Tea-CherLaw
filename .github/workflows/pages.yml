@@ -27,8 +27,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     env:
       # public values (safe in the browser): Settings > Secrets and variables > Actions > Variables
-      VITE_SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-      VITE_SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
+      VITE_SUPABASE_URL: https://gylqbkqxjgmtxmanhssm.supabase.co
+      VITE_SUPABASE_ANON_KEY: sb_publishable_icGbzGDXmmTuTMtjjrEP4g_FJSomS61
       BASE_PATH: ${{ vars.CUSTOM_DOMAIN && '/' || format('/{0}/', github.event.repository.name) }}
     steps:
       - uses: actions/checkout@v4
