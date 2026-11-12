@@ -5,7 +5,7 @@ import { useSyncExternalStore } from 'react';
 import { siteUrl } from '../lib/share';
 import { AuthError } from './auth-error';
 import { accountsConfigured, hasStoredSession, loadClient } from './client';
-import { SCHOOL_NOTE, roleForEmail } from './schools';
+import { SCHOOL_SHORT, roleForEmail } from './schools';
 import { endSync, startSync, stopSync } from './sync';
 import { limit, lockout } from './throttle';
 import { mirrorAccount } from '../cms/session';
@@ -59,7 +59,7 @@ function friendly(e: { message?: string; code?: string; status?: number } | null
   const m = (e?.message || '').toLowerCase(), c = e?.code || '';
   if (c === 'email_not_confirmed' || m.includes('email not confirmed')) return new AuthError('unconfirmed', 'You haven’t confirmed this email yet. Check your inbox for the link, or send it again below.');
   if (c === 'invalid_credentials' || m.includes('invalid login')) return new AuthError('credentials', 'That email and password don’t match. Check them and try again, or reset your password.');
-  if (m.includes('database error saving new user') || m.includes('database error updating user') || m.includes('verified school')) return new AuthError('school', SCHOOL_NOTE);
+  if (m.includes('database error saving new user') || m.includes('database error updating user') || m.includes('verified school')) return new AuthError('school', SCHOOL_SHORT);
   if (m.includes('slow down')) return new AuthError('rate', 'Slow down: try again in a moment.');
   if (c === 'weak_password' || m.includes('password should') || m.includes('password is known')) return new AuthError('weak', 'Choose a stronger password: at least ' + MIN_PW + ' characters, and not one that is easy to guess.');
   if (c === 'captcha_failed' || m.includes('captcha')) return new AuthError('other', 'The security check failed. Reload the page and try again.');
@@ -87,7 +87,7 @@ export async function signUp(o: { email: string; password: string; name: string 
   const sb = await need(), name = clean(o.name).slice(0, 40), email = o.email.trim();
   if (!name) throw new AuthError('invalid', 'Type your name.');
   if (/[<>\u0000-\u001f]/.test(name)) throw new AuthError('invalid', 'Use letters, numbers and ordinary punctuation in your name.');
-  if (!roleForEmail(email)) throw new AuthError('school', SCHOOL_NOTE);
+  if (!roleForEmail(email)) throw new AuthError('school', SCHOOL_SHORT);
   checkPassword(o.password, email);
   limit('signup', email, 3, 3_600_000, 'sign-up attempts for this email');
   const { error } = await sb.auth.signUp({ email, password: o.password, options: { emailRedirectTo: redirect(), data: { display_name: name } } });
@@ -119,7 +119,7 @@ export async function setPassword(password: string): Promise<void> {
   const { error } = await (await need()).auth.updateUser({ password }); if (error) throw friendly(error);
 }
 export async function changeEmail(email: string): Promise<void> {
-  if (!roleForEmail(email)) throw new AuthError('school', SCHOOL_NOTE);
+  if (!roleForEmail(email)) throw new AuthError('school', SCHOOL_SHORT);
   limit('chmail', state.session?.user.id || 'x', 2, 3_600_000, 'email changes');
   const { error } = await (await need()).auth.updateUser({ email: email.trim() }, { emailRedirectTo: redirect() }); if (error) throw friendly(error);
 }

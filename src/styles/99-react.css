@@ -9,6 +9,7 @@
 .auth form.panel, .auth .panel { max-width: 34rem; }
 .auth .cols .panel { max-width: none; }
 .check { display: flex; gap: .5rem; align-items: flex-start; font-size: .95rem; }
-.check input { margin-top: .3rem; }
+.check input { margin: 3px 0 0; flex: none; }
+.check > span { min-width: 0; }
 .ok-box { max-width: 34rem; padding: .85rem 1rem; border: 1px solid var(--ok, #2e7d4f); border-left-width: 4px; border-radius: 10px; background: var(--surface, transparent); }
 .ok-box p { margin: 0; }

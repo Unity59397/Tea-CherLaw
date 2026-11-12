@@ -22,6 +22,16 @@ const AICON: Record<string, ReactNode> = {
   contract: <Ic><path d="M6 3h9l4 4v14H6z" /><path d="M9 15c1.5-2.5 2.5 1.5 4 0s2-1 3 0" /><path d="M9 9h4" /></Ic>
 };
 
+/** what one featured case shows (also drawn, invisibly, for every case that can appear, so the card keeps the same height whichever case is on screen) */
+const FeatText = ({ c }: { c: Data['cases'][number] }) => (
+  <>
+    <h2><i>{c.name}</i></h2>
+    <p className="fc-meta">{metaLine(c)}</p>
+    <div className="rule"><h3>What happened</h3><p className="fc-story">{c.gist}</p></div>
+    <div className="rule"><h3>The rule</h3><p className="fc-rule">{c.principle}</p></div>
+  </>
+);
+
 /** the rotating "featured case": key cases in a random order, moving on by itself (the countdown bar is a CSS animation that tells us when it ends) */
 function Featured({ data }: { data: Data }) {
   const { sheet, openSheet } = useUI();
@@ -31,6 +41,7 @@ function Featured({ data }: { data: Data }) {
     for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
     return a;
   }, [data]);
+  const ghosts = useMemo(() => ids.map(id => data.by[id]).filter(Boolean), [ids, data]);   // every case that can appear, drawn invisibly in the same cell
   const [i, setI] = useState(0), [paused, setPaused] = useState(false), [auto, setAuto] = useState(true), [due, setDue] = useState(false);
   const step = (d: number, byTimer = false) => { setAuto(byTimer); setI(x => (x + d + ids.length) % ids.length); };
   /* the timer ran out while a case sheet was open: move on once it closes */
@@ -39,11 +50,9 @@ function Featured({ data }: { data: Data }) {
   return (
     <article className={'paper-card feat' + (paused ? ' paused' : '')} id="feat" style={{ ['--feat-secs' as string]: FEATURE_SECS + 's' }} aria-roledescription="carousel" aria-label="Featured case">
       <div className="feat-top"><p className="eyebrow"><Icon.star />Featured case</p><span className="pill" id="feat-area">{AREA[c.area].label}</span></div>
-      <div className="feat-body swap" id="feat-body" key={c.id} aria-live={auto ? 'off' : 'polite'}>
-        <h2><i>{c.name}</i></h2>
-        <p className="fc-meta">{metaLine(c)}</p>
-        <div className="rule"><h3>What happened</h3><p className="fc-story">{c.gist}</p></div>
-        <div className="rule"><h3>The rule</h3><p className="fc-rule">{c.principle}</p></div>
+      <div className="feat-stack">
+        <div className="feat-body swap" id="feat-body" key={c.id} aria-live={auto ? 'off' : 'polite'}><FeatText c={c} /></div>
+        {ghosts.map(g => <div className="feat-body feat-ghost" key={g.id} aria-hidden="true"><FeatText c={g} /></div>)}
       </div>
       <div className="feat-foot">
         <button type="button" className="btn btn-sm btn-primary" onClick={() => openSheet(c.id)}><Icon.info />View full case</button>

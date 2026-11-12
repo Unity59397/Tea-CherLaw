@@ -13,4 +13,5 @@ export function roleForEmail(email: string): SchoolRole | null {
   const dom = e.slice(e.indexOf('@') + 1).toLowerCase();
   return SCHOOLS.find(s => s.domain === dom)?.role || null;
 }
+export const SCHOOL_SHORT = 'That isn’t a verified school email. Use your @ndonline.ac.uk or @notredamecoll.ac.uk address.';
 export const SCHOOL_NOTE = 'Currently only verified schools can register accounts. Emails ending in @ndonline.ac.uk become student accounts and emails ending in @notredamecoll.ac.uk become teacher accounts, automatically.';

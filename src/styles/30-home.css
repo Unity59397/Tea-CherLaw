@@ -19,9 +19,13 @@
 
 .feat { position: relative; overflow: hidden; gap: 10px; padding-bottom: 28px; color: var(--ink); }
 .feat-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.feat-top .pill, .feat-top .eyebrow { white-space: nowrap; }   /* a long topic name must not wrap and make the card taller */
 .feat-top .eyebrow { display: inline-flex; align-items: center; gap: 6px; color: var(--brass); }
 .pill { border: 1px solid var(--line); background: var(--surface-2); border-radius: 999px; padding: .1rem .7rem; font-size: .75rem; font-weight: 600; white-space: nowrap; }
-.feat-body { display: flex; flex-direction: column; gap: 12px; min-height: 14.5rem; }
+.feat-stack { display: grid; }
+.feat-stack > .feat-body { grid-area: 1 / 1; align-self: start; }   /* every case sits in the same cell, so the card is as tall as the longest one and never resizes */
+.feat-ghost { visibility: hidden; pointer-events: none; user-select: none; }
+.feat-body { display: flex; flex-direction: column; gap: 12px; }
 .feat-body.swap { animation: featin .38s ease both; }
 @keyframes featin { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 .feat-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
@@ -64,7 +68,6 @@
   .st:nth-child(3) { border-right: 0; }
   .st.prog { grid-column: 1 / -1; border-right: 0; border-bottom: 0; }
   .st dd { font-size: 1.5rem; }
-  .feat-body { min-height: 0; }
 }
 @media (max-width: 600px) { .areas { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .area-card { min-height: 128px; padding: 14px; } .area-name { font-size: 1rem; } }
 .paper-card { background: var(--surface); border: 1px solid var(--line); outline: 1px solid var(--brass); outline-offset: -7px; border-radius: 4px; padding: 30px 28px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 12px; }

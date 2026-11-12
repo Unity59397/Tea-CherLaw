@@ -27,13 +27,13 @@ export function Dashboard({ page }: { page: CmsPage }) {
   return (
     <div className="wrap cms">
       <CmsHead eyebrow="Teacher" title="Your classrooms" lede="Create classrooms, build playlists of cases, set homework and see how each student is getting on." />
-      <ErrBox err={page.err} />
       <section aria-labelledby="h-cl" className="cms-sec"><div className="sec-head"><h2 id="h-cl">Classrooms</h2></div>
         <form className="inline-form" onSubmit={create}><label className="sr" htmlFor="nc-name">Classroom name</label><input className="txt" id="nc-name" name="name" maxLength={40} placeholder="New classroom, e.g. Year 13 Law" autoComplete="off" value={name} onChange={e => setName(e.target.value)} /><button type="submit" className="btn btn-primary"><Icon.plus />Create classroom</button></form>
+        <ErrBox err={page.err} />
         {info.cls.length ? <div className="grid">{info.cls.map(c => (
           <article className="card" key={c.id}><h3 className="card-t"><Link to={{ hash: '#c=' + c.id }}>{c.name}</Link></h3><p className="n">{plural(c.students, 'student')} · {plural(c.homework, 'homework set')}</p>
             <p className={'inv inv-' + c.invite}>{inviteText(c.invite, c.code, c.expiresOn)}</p><p className="card-go"><Link className="btn btn-sm" to={{ hash: '#c=' + c.id }}>Open classroom</Link></p></article>
-        ))}</div> : <div className="empty"><p><strong>No classrooms yet.</strong></p><p>Create one below. It comes with an invite link and a 6-digit code to give your students.</p></div>}
+        ))}</div> : <div className="empty"><p><strong>No classrooms yet.</strong></p><p>Name one above to get started. It comes with an invite link and a 6-digit code to give your students.</p></div>}
       </section>
       <section aria-labelledby="h-pl" className="cms-sec"><div className="sec-head"><h2 id="h-pl">Playlists</h2><Link className="btn btn-sm" to={{ hash: '#p=new' }}><Icon.plus />New playlist</Link></div>
         {info.pls.length ? <div className="grid">{info.pls.map(p => (

@@ -1,6 +1,7 @@
 /* Sign up, sign in, forgot password, the email-link landing page and the profile. All talk to Supabase through src/auth/auth.ts. */
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { SCHOOL_SHORT } from '../auth/schools';
 import { AuthError, MIN_PW, changeEmail, deleteAccount, displayName, exportMyData, errMessage, resendConfirmation, saveProfile, sendPasswordReset, setPassword, signIn, signOut, signUp, useAuth, verifyLink } from '../auth/auth';
 import { PlainShell } from '../components/Shell';
 import { SchoolNote } from '../components/SchoolNote';
@@ -30,7 +31,7 @@ const Password = ({ id, label, value, onChange, autoComplete, hint }: { id: stri
   return (<><label htmlFor={id}>{label}</label>
     <input className="txt" id={id} name={id} type={show ? 'text' : 'password'} autoComplete={autoComplete} minLength={MIN_PW} required value={value} onChange={e => onChange(e.target.value)} aria-describedby={hint ? id + '-h' : undefined} />
     {hint && <p className="n" id={id + '-h'}>{hint}</p>}
-    <label className="check"><input type="checkbox" checked={show} onChange={e => setShow(e.target.checked)} /> Show password</label></>);
+    <label className="check"><input type="checkbox" checked={show} onChange={e => setShow(e.target.checked)} /><span>Show password</span></label></>);
 };
 /** already signed in: go to the profile */
 function useBounce() {
@@ -48,6 +49,7 @@ function useBounce() {
 export function Signup() {
   const mounted = useMounted(), a = useBounce(), { err, busy, run } = useAction();
   const [name, setName] = useState(''), [email, setEmail] = useState(''), [pw, setPw] = useState(''), [agree, setAgree] = useState(false), [sent, setSent] = useState(''), [again, setAgain] = useState('');
+  const schoolErr = err === SCHOOL_SHORT;
   if (!mounted) return shell('Account', 'Create an account', 'Make a free Tea-cher account.');
   if (!a.configured) return <Off />;
   const submit = (e: FormEvent) => { e.preventDefault(); void run(async () => { await signUp({ email, password: pw, name }); setSent(email.trim()); setPw(''); }); };
@@ -64,10 +66,11 @@ export function Signup() {
       <SchoolNote />
       <form className="panel stack" onSubmit={submit}>
         <label htmlFor="su-name">Your name <span className="n">(shown to your teacher)</span></label><input className="txt" id="su-name" name="name" maxLength={40} autoComplete="name" required value={name} onChange={e => setName(e.target.value)} />
-        <label htmlFor="su-email">School email</label><input className="txt" id="su-email" name="email" type="email" autoComplete="email" required value={email} onChange={e => setEmail(e.target.value)} />
+        <label htmlFor="su-email">School email</label><input className="txt" id="su-email" name="email" type="email" autoComplete="email" required value={email} onChange={e => setEmail(e.target.value)} aria-invalid={schoolErr || undefined} aria-describedby={schoolErr ? 'auth-err' : undefined} />
+        {schoolErr && <Err msg={err} />}
         <Password id="su-pw" label="Password" value={pw} onChange={setPw} autoComplete="new-password" hint={MIN_PW + ' or more characters. Not a common word, and not your email name.'} />
-        <label className="check"><input type="checkbox" required checked={agree} onChange={e => setAgree(e.target.checked)} /> I’m 16 or over and I’ve read the <Link to="/privacy">privacy policy</Link>.</label>
-        <Err msg={err} />
+        <label className="check"><input type="checkbox" required checked={agree} onChange={e => setAgree(e.target.checked)} /><span>I’m 16 or over and I’ve read the <Link to="/privacy">privacy policy</Link>.</span></label>
+        {!schoolErr && <Err msg={err} />}
         <div><button type="submit" className="btn btn-primary" disabled={busy}>{busy ? 'Creating…' : 'Create account'}</button></div>
         <p className="n">Already have an account? <Link to="/login">Sign in</Link>.</p>
       </form>

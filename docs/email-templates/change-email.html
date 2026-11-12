@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>Confirm your new Tea-cher email</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f3f4f8;" bgcolor="#f3f4f8">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:#f3f4f8;">Confirm the new email address for your Tea-cher account.</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f3f4f8" style="background-color:#f3f4f8;">
+<tr><td align="center" style="padding:28px 12px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
+<tr><td bgcolor="#1c2b52" style="background-color:#1c2b52;padding:26px 32px;border-radius:10px 10px 0 0;">
+<div style="font-family:'Libre Baskerville',Georgia,'Times New Roman',serif;font-size:26px;line-height:30px;font-weight:bold;color:#f3f4f8;">Tea-cher</div>
+<div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:16px;letter-spacing:2px;text-transform:uppercase;color:#d3af5e;padding-top:6px;">A No-Tea Studio project</div>
+</td></tr>
+<tr><td bgcolor="#d3af5e" height="4" style="background-color:#d3af5e;height:4px;line-height:4px;font-size:4px;">&nbsp;</td></tr>
+<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:36px 32px 12px 32px;">
+<h1 style="margin:0 0 16px 0;font-family:'Libre Baskerville',Georgia,'Times New Roman',serif;font-size:24px;line-height:32px;font-weight:bold;color:#131a2e;">Confirm your new email</h1>
+<p style="margin:0 0 14px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;color:#3a4358;">You asked to change the email address on your Tea-cher account.</p>
+<p style="margin:0 0 26px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:26px;color:#3a4358;">Use the button below to confirm the new address. Only school addresses can be used.</p>
+<table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+<td bgcolor="#d3af5e" style="background-color:#d3af5e;border-radius:8px;">
+<a href="{{ .SiteURL }}/auth/callback?token_hash={{ .TokenHash }}&amp;type=email_change" style="display:inline-block;padding:14px 28px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:20px;font-weight:bold;color:#1a1405;text-decoration:none;border-radius:8px;">Confirm the new email</a>
+</td></tr></table>
+<p style="margin:26px 0 6px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6b7388;">The button not working? Copy this address into your browser:</p>
+<p style="margin:0 0 24px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#1c2b52;word-break:break-all;">{{ .SiteURL }}/auth/callback?token_hash={{ .TokenHash }}&amp;type=email_change</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-top:1px solid #e1e5ef;font-size:0;line-height:0;height:1px;">&nbsp;</td></tr></table>
+<p style="margin:18px 0 18px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6b7388;">This link can only be used once and expires soon. If it wasn’t you, ignore this email and your account stays as it is. If you’re worried, change your password.</p>
+</td></tr>
+<tr><td bgcolor="#ffffff" style="background-color:#ffffff;border-radius:0 0 10px 10px;font-size:0;line-height:0;height:12px;">&nbsp;</td></tr>
+<tr><td style="padding:20px 32px 0 32px;">
+<p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#6b7388;text-align:center;">Tea-cher is an independent revision aid for OCR A Level Law (H418), made by No-Tea Studio. It is not affiliated with or endorsed by OCR.</p>
+</td></tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>

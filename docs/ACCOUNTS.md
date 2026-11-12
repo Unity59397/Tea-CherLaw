@@ -36,11 +36,11 @@ The old prototype sign-up, role switcher and example classrooms have been remove
 4. **Authentication > URL Configuration:**
    - *Site URL*: the live address, e.g. `https://tea-cher.co.uk` (or `https://<user>.github.io/<repo>` before the domain is set up: no trailing slash).
    - *Redirect URLs*: add `<site>/auth/callback` and `http://localhost:5173/auth/callback` for local testing.
-5. **Authentication > Email Templates**: replace the links so they work from any device and browser (the default links need the same browser that signed up):
-   - *Confirm signup*: `<h2>Confirm your email</h2><p><a href="{{ .SiteURL }}/auth/callback?token_hash={{ .TokenHash }}&type=signup">Confirm my email</a></p>`
-   - *Reset password*: `<h2>Reset your password</h2><p><a href="{{ .SiteURL }}/auth/callback?token_hash={{ .TokenHash }}&type=recovery">Choose a new password</a></p>`
-   - *Change email address*: `<p><a href="{{ .SiteURL }}/auth/callback?token_hash={{ .TokenHash }}&type=email_change">Confirm the new email</a></p>`
-   Say who it is from in the text ("Tea-cher, a No-Tea Studio project") so people recognise it.
+5. **Authentication > Emails > Templates** (these unlock once custom SMTP is saved): the branded templates are in `docs/email-templates/`. For each one, paste the whole file into the Message body and set the Subject. They link to the site's own `/auth/callback` page so they work from any device and browser (the default links need the same browser that signed up).
+   - *Confirm sign up*: `confirm-signup.html`, subject `Confirm your Tea-cher account`
+   - *Reset password*: `reset-password.html`, subject `Reset your Tea-cher password`
+   - *Change email address*: `change-email.html`, subject `Confirm your new Tea-cher email`
+   Keep the `{{ .SiteURL }}` and `{{ .TokenHash }}` placeholders exactly as written.
 6. **Email sending for real use:** Supabase's built-in sender is for testing only (a handful of emails an hour, and it may land in spam).
    Authentication > SMTP Settings: add a sender such as Resend, Brevo or Postmark using an address on your own domain, and set up SPF/DKIM there.
 7. **Connect the site:** Project Settings > API: copy the *Project URL* and the *anon public* key.
