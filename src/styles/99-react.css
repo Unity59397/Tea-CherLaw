@@ -1,0 +1,14 @@
+/* The React app mounts inside <div id="root">. The page layout (header, main, footer stacked in a column that fills the screen) was written for those
+   three being direct children of <body>, so the wrapper takes no part in the layout. */
+#root { display: contents; }
+
+/* "Featured case" label: the brass colour was a little pale on white (4.0:1); mixing in some of the ink colour brings it to 5:1 in both themes. */
+.feat-top .eyebrow { color: color-mix(in srgb, var(--brass) 78%, var(--ink)); }
+
+/* ----- account pages (sign up, sign in, profile) ----- */
+.auth form.panel, .auth .panel { max-width: 34rem; }
+.auth .cols .panel { max-width: none; }
+.check { display: flex; gap: .5rem; align-items: flex-start; font-size: .95rem; }
+.check input { margin-top: .3rem; }
+.ok-box { max-width: 34rem; padding: .85rem 1rem; border: 1px solid var(--ok, #2e7d4f); border-left-width: 4px; border-radius: 10px; background: var(--surface, transparent); }
+.ok-box p { margin: 0; }

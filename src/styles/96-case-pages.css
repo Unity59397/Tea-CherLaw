@@ -1,0 +1,18 @@
+/* ---------- case pages, All cases and the text shown before the app loads ---------- */
+.case-page, .cases-index, .static-intro { padding-block: 28px 56px; }
+.crumbs { font-size: .8125rem; color: var(--ink-2); margin-bottom: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+.crumbs a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; }
+.crumbs a:hover { color: var(--ink); }
+.case-page h2 { margin-top: 1.6em; }
+.case-page .lede, .static-intro .lede, .cases-index .lede { font-size: 1.0625rem; }
+.tagrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 1.4em; }
+.tagrow .pill, .idx-jump .pill { text-decoration: none; color: var(--ink); }
+.tagrow .pill:hover, .idx-jump .pill:hover { border-color: var(--brass); }
+.case-cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 2em 0 1.2em; }
+.plain-list { padding-left: 1.2em; display: grid; gap: 8px; margin: 0 0 1.4em; }
+.idx-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 1.2em 0 1.6em; }
+.idx-area { margin-top: 2.4em; scroll-margin-top: 80px; }
+.idx-area h3 { margin-top: 1.4em; scroll-margin-top: 80px; }
+.idx-area h4 { font: 700 1rem/1.3 var(--font-body); color: var(--ink-2); margin: 1.1em 0 .4em; scroll-margin-top: 80px; }
+.idx-list { padding-left: 1.2em; margin: 0; display: grid; gap: 4px; }
+@media (min-width: 760px) { .idx-list { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; } }

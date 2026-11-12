@@ -1,0 +1,48 @@
+# Builds the site and publishes dist/ to GitHub Pages on every push to main.
+# One-off setup: repository Settings > Pages > Build and deployment > Source: "GitHub Actions".
+# Where the site lives decides how links are written:
+#   - on a custom domain (tea-cher.co.uk), the site is at the root, so set a repository VARIABLE named CUSTOM_DOMAIN (any value, for example "yes");
+#   - without it, the site is at https://<user>.github.io/<repo>/, so every link is built with that /<repo>/ prefix.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      # public values (safe in the browser): Settings > Secrets and variables > Actions > Variables
+      VITE_SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+      VITE_SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
+      BASE_PATH: ${{ vars.CUSTOM_DOMAIN && '/' || format('/{0}/', github.event.repository.name) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Validate, build and check the site
+        run: npm run check
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deployment
+        uses: actions/deploy-pages@v4

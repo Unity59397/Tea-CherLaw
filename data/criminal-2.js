@@ -1,0 +1,301 @@
+/* Criminal law: fatal offences, non-fatal offences, property offences. */
+window.TC_CASES = window.TC_CASES || [];
+window.TC_CASES.push(
+  {
+    id: "r-v-vickers-1957", name: "R v Vickers", cite: "[1957] 2 QB 664", year: 1957, court: "CA",
+    area: "criminal", topic: "cl-fatal", sub: "fo-murder", key: false,
+    tags: ["Malice aforethought", "Intention to cause GBH"],
+    gist: "A burglar strikes an elderly shopkeeper who recognises him, intending to hurt her but not necessarily to kill, and she dies.",
+    principle: "The mens rea for murder is an intention to kill or to cause grievous bodily harm.",
+    facts: "Vickers broke into the cellar of a shop. The elderly owner recognised him and he attacked her. She died from the injuries. He argued he had only meant to frighten or injure her.",
+    held: "The Court of Criminal Appeal upheld the murder conviction. Malice aforethought covers an intention to do grievous bodily harm, so no intention to kill is needed.",
+    significance: "Origin of the GBH rule for murder, confirmed by later decisions. Often criticised because it makes someone a murderer who never meant to kill.",
+    links: ["r-v-woollin-1998"]
+  },
+  {
+    id: "r-v-clinton-parker-and-evans-2012", name: "R v Clinton, Parker and Evans", cite: "[2012] EWCA Crim 2", year: 2012, court: "CA",
+    area: "criminal", topic: "cl-fatal", sub: "fo-loss-of-control", key: false,
+    tags: ["Loss of control", "Sexual infidelity", "Coroners and Justice Act 2009"],
+    gist: "A depressed man kills his wife after she taunts him about her affairs, and the judge refuses to let the jury consider the loss of control defence.",
+    principle: "Sexual infidelity cannot alone be a qualifying trigger, but it can be considered as part of the wider circumstances.",
+    facts: "Clinton strangled his wife after she told him about affairs and encouraged him to kill himself. The trial judge held the defence of loss of control could not go to the jury because the trigger was sexual infidelity, which s55(6)(c) excludes.",
+    held: "The Court of Appeal held that infidelity is excluded only as a trigger on its own. If it is part of the context for other triggers, such as words or conduct causing a justifiable sense of being seriously wronged, the jury can consider it.",
+    significance: "The leading case on the loss of control defence under ss54 and 55 Coroners and Justice Act 2009. It narrows the effect of the infidelity exclusion.",
+    links: ["r-v-ahluwalia-1992"]
+  },
+  {
+    id: "r-v-ahluwalia-1992", name: "R v Ahluwalia", cite: "[1992] 4 All ER 889", year: 1992, court: "CA",
+    area: "criminal", topic: "cl-fatal", sub: "fo-dr", key: false,
+    tags: ["Domestic abuse", "Provocation", "Slow burn"],
+    gist: "After years of abuse, a woman sets fire to her sleeping husband hours after a violent threat, and her provocation defence fails.",
+    principle: "A time gap between provocation and the killing may mean there was no sudden loss of self-control, but it can support diminished responsibility.",
+    facts: "Kiranjit Ahluwalia suffered years of violence from her husband. After he threatened her, she waited until he slept and set fire to him. He died and she was convicted of murder.",
+    held: "The Court of Appeal rejected the provocation argument because there was no sudden and temporary loss of control. It allowed the appeal on fresh evidence of diminished responsibility and ordered a retrial on that basis.",
+    significance: "Highlighted the problem of the “slow burn” response to domestic abuse. It fed into reform and the replacement of provocation by loss of control in 2009.",
+    links: ["r-v-clinton-parker-and-evans-2012", "r-v-byrne-1960"]
+  },
+  {
+    id: "r-v-byrne-1960", name: "R v Byrne", cite: "[1960] 2 QB 396", year: 1960, court: "CA",
+    area: "criminal", topic: "cl-fatal", sub: "fo-dr", key: false,
+    tags: ["Abnormality of mind", "Diminished responsibility"],
+    gist: "A man with violent sexual urges he finds hard to control strangles a young woman and mutilates her body.",
+    principle: "Abnormality of mind is a state so different from ordinary human beings that a reasonable person would call it abnormal.",
+    facts: "Byrne, a sexual psychopath, strangled a young woman in a YWCA hostel and mutilated her body. Medical evidence said he had violent perverted desires he found difficult or impossible to control.",
+    held: "The Court of Criminal Appeal quashed the murder conviction and substituted manslaughter. Abnormality of mind is wide enough to include the inability to exercise willpower to control physical acts.",
+    significance: "The leading authority on the meaning of abnormality of mind. The definition has now been replaced by “abnormality of mental functioning” in s2 Homicide Act 1957 as amended.",
+    links: ["r-v-golds-2016"]
+  },
+  {
+    id: "r-v-golds-2016", name: "R v Golds", cite: "[2016] UKSC 61", year: 2016, court: "UKSC",
+    area: "criminal", topic: "cl-fatal", sub: "fo-dr", key: true,
+    tags: ["Substantial impairment", "Diminished responsibility"],
+    gist: "A man convicted of murdering his partner argues his mental disorder substantially impaired him, and the courts disagree on how much “substantially” means.",
+    principle: "“Substantial” impairment means more than merely trivial. It does not need to be total or very great.",
+    facts: "Golds killed his partner and relied on diminished responsibility under s2 Homicide Act 1957, as amended. The question was what “substantially” means in s2(1)(b), when the jury asked for guidance.",
+    held: "The Supreme Court held that the word has its ordinary meaning and in this context means “more than merely trivial”. Judges should usually leave it to the jury unless they ask.",
+    significance: "Clarifies the amended defence of diminished responsibility. It makes the defence slightly wider than earlier views of “substantial”.",
+    links: ["r-v-byrne-1960"]
+  },
+  {
+    id: "r-v-dietschmann-2003", name: "R v Dietschmann", cite: "[2003] UKHL 10", year: 2003, court: "HL",
+    area: "criminal", topic: "cl-fatal", sub: "fo-dr", key: false,
+    tags: ["Alcohol and drugs", "Diminished responsibility"],
+    gist: "A grieving, depressed man drinks heavily and kicks another man to death, and argues his mental abnormality substantially impaired him.",
+    principle: "Diminished responsibility can succeed even if intoxication also contributed to the killing, if the abnormality alone substantially impaired his responsibility.",
+    facts: "Dietschmann was suffering from an adjustment disorder after his aunt's death. He drank a lot of alcohol and kicked a man to death. The judge told the jury that voluntary intoxication could not be taken into account.",
+    held: "The House of Lords quashed the murder conviction. If the abnormality of mind substantially impaired his mental responsibility, the defence is available even though he would not have killed if he had not been drinking.",
+    significance: "Key case on the interaction between alcohol and diminished responsibility. Later discussed in R v Wood (2008).",
+    links: ["r-v-byrne-1960"]
+  },
+  {
+    id: "r-v-church-1965", name: "R v Church", cite: "[1966] 1 QB 59", year: 1965, court: "CA",
+    area: "criminal", topic: "cl-fatal", sub: "fo-uam", key: false,
+    tags: ["Dangerous act", "Objective test", "Series of acts"],
+    gist: "A man hits a woman after she mocks him, thinks she is dead, and throws her into a river where she drowns.",
+    principle: "An unlawful act is dangerous if a sober and reasonable person would see that it exposes someone to the risk of some harm.",
+    facts: "Church hit a woman who had taunted him about his sexual failings. Thinking she was dead, he threw her in a river. She was alive and drowned.",
+    held: "The Court of Criminal Appeal upheld a manslaughter conviction. The test is whether a sober, reasonable person would recognise the risk of some physical harm, although not necessarily serious harm. It also treated his acts as a series.",
+    significance: "The standard test for a dangerous act in unlawful act manslaughter. Also used on coincidence of actus reus and mens rea.",
+    links: ["dpp-v-newbury-and-jones-1976", "r-v-lamb-1967"]
+  },
+  {
+    id: "dpp-v-newbury-and-jones-1976", name: "DPP v Newbury and Jones", cite: "[1977] AC 500", year: 1976, court: "HL",
+    area: "criminal", topic: "cl-fatal", sub: "fo-uam", key: true,
+    tags: ["Mens rea", "Children", "Train guard"],
+    gist: "Two teenage boys throw a paving slab from a railway bridge at an approaching train, and it kills the guard.",
+    principle: "For unlawful act manslaughter the defendant need only intend the unlawful act. He need not foresee that it is dangerous.",
+    facts: "Newbury and Jones, aged 15, pushed a piece of paving stone from a railway bridge onto an oncoming train. It crashed through the cab window and killed the guard.",
+    held: "The House of Lords upheld their manslaughter convictions. The prosecution does not have to prove the defendants realised their act was unlawful and dangerous, as long as a reasonable person would have.",
+    significance: "Confirms the mens rea of unlawful act manslaughter is that for the base offence. Criticised for allowing a conviction without awareness of any risk.",
+    links: ["r-v-church-1965"]
+  },
+  {
+    id: "r-v-lamb-1967", name: "R v Lamb", cite: "[1967] 2 QB 981", year: 1967, court: "CA",
+    area: "criminal", topic: "cl-fatal", sub: "fo-uam", key: false,
+    tags: ["Unlawful act", "Revolver"],
+    gist: "A man points a revolver at his friend as a joke, honestly believing neither of the two bullets in the chamber would fire, and it kills his friend.",
+    principle: "There is no unlawful act, and so no unlawful act manslaughter, if the act is not a crime because the victim was not frightened and the defendant had no mens rea.",
+    facts: "Lamb and his friend were playing with a revolver with two bullets in the chamber, neither of which was in the firing position. Lamb pulled the trigger and the cylinder rotated, which fired a bullet and killed his friend.",
+    held: "The Court of Appeal quashed the manslaughter conviction. It was not an assault because the friend was not afraid and Lamb did not intend to frighten, so the unlawful act requirement was not satisfied.",
+    significance: "Shows that the unlawful act must itself be a crime with all of its elements. Compare Church.",
+    links: ["r-v-church-1965"]
+  },
+  {
+    id: "r-v-adomako-1994", name: "R v Adomako", cite: "[1995] 1 AC 171", year: 1994, court: "HL",
+    area: "criminal", topic: "cl-fatal", sub: "fo-gnm", key: true,
+    tags: ["Medical", "Gross negligence", "Anaesthetist"],
+    gist: "An anaesthetist fails to notice for several minutes that the breathing tube has become disconnected during an operation, and the patient dies.",
+    principle: "Gross negligence manslaughter requires a duty of care, a breach causing death, and negligence so bad that the jury considers it criminal.",
+    facts: "Dr Adomako was the anaesthetist during an eye operation. The tube supplying oxygen disconnected, and he did not notice for several minutes despite warning signs. The patient suffered a cardiac arrest and died.",
+    held: "The House of Lords upheld the conviction. The ordinary law of negligence decides whether there was a duty and breach. The jury then decides whether the conduct was so bad, having regard to the risk of death, as to be criminal.",
+    significance: "The leading case on gross negligence manslaughter. Criticised as circular, because the jury decides whether something is a crime by deciding whether it is criminal.",
+    links: ["r-v-rose-2017"]
+  },
+  {
+    id: "r-v-misra-and-srivastava-2004", name: "R v Misra and Srivastava", cite: "[2004] EWCA Crim 2375", year: 2004, court: "CA",
+    area: "criminal", topic: "cl-fatal", sub: "fo-gnm", key: false,
+    tags: ["Medical", "Gross negligence", "Article 7"],
+    gist: "Two junior doctors fail to spot and treat an infection in a patient after knee surgery, and he dies of toxic shock.",
+    principle: "Gross negligence manslaughter is not too uncertain to breach Article 7 ECHR, and the risk must be of death.",
+    facts: "Two doctors treating a patient after a knee operation failed to diagnose or treat a serious infection over several days. He died of toxic shock syndrome. They were convicted of gross negligence manslaughter.",
+    held: "The Court of Appeal dismissed their appeals. The Adomako test is sufficiently certain and does not breach Article 7. The risk must be of death, not just serious harm.",
+    significance: "Answers the criticism that the Adomako test is circular. It also confirms that the risk must be of death.",
+    links: ["r-v-adomako-1994"]
+  },
+  {
+    id: "r-v-rose-2017", name: "R v Rose", cite: "[2017] EWCA Crim 1168", year: 2017, court: "CA",
+    area: "criminal", topic: "cl-fatal", sub: "fo-gnm", key: false,
+    tags: ["Medical", "Objective test", "Optician"],
+    gist: "An optician fails to examine the back of a young boy's eyes, which would have revealed a condition that went on to cause his death.",
+    principle: "The risk of death must be obvious and serious to a reasonable person, whether or not the defendant realised it.",
+    facts: "An optician failed to carry out a test that would have shown raised pressure at the back of a boy's eyes caused by a brain tumour. The boy later died. She was convicted of gross negligence manslaughter.",
+    held: "The Court of Appeal upheld the conviction. The test is objective, and the question is whether a reasonable person in the defendant's position would have foreseen a serious and obvious risk of death. The defendant's own awareness is not required.",
+    significance: "Settles that the defendant's own foresight is not needed in gross negligence manslaughter, which keeps it distinct from recklessness.",
+    links: ["r-v-adomako-1994", "r-v-misra-and-srivastava-2004"]
+  },
+  {
+    id: "r-v-ireland-and-r-v-burstow-1997", name: "R v Ireland and R v Burstow", cite: "[1998] AC 147", year: 1997, court: "HL",
+    area: "criminal", topic: "cl-nonfatal", sub: "nf-assault", key: true,
+    tags: ["Silent phone calls", "Psychiatric injury", "Stalking"],
+    gist: "A man makes repeated silent phone calls to several women, and another pursues a campaign of harassment against a woman that leaves her with severe depression.",
+    principle: "Silent phone calls can be an assault, and psychiatric illness can be actual or grievous bodily harm.",
+    facts: "Ireland made silent calls to three women and was convicted of assault occasioning ABH. Burstow harassed a woman and caused her severe depression, and was convicted under s20.",
+    held: "The House of Lords upheld both convictions. A silent call can cause fear of immediate violence, and “bodily harm” includes recognised psychiatric illness. Under s20 “inflict” does not require direct violence.",
+    significance: "Extended assault to include silent calls, and confirmed the main rules on psychiatric injury. Parliament has since added harassment and stalking offences.",
+    links: ["r-v-chan-fook-1993"]
+  },
+  {
+    id: "collins-v-wilcock-1984", name: "Collins v Wilcock", cite: "[1984] 1 WLR 1172", year: 1984, court: "DC",
+    area: "criminal", topic: "cl-nonfatal", sub: "nf-assault", key: true,
+    tags: ["Battery", "Police", "Everyday contact"],
+    gist: "A police officer takes hold of a woman's arm to stop her walking away from a conversation, and she scratches the officer.",
+    principle: "A battery is any intentional or reckless unlawful touching. Ordinary social contact is not battery, but restraining someone is.",
+    facts: "A woman officer wanted to question Collins about soliciting. When Collins walked away, the officer took hold of her arm. Collins scratched the officer and was charged with assaulting a police officer in the execution of her duty.",
+    held: "The Divisional Court quashed the conviction. The officer's touching went beyond the generally accepted conduct of everyday life and was a battery, so she was not acting in the execution of her duty.",
+    significance: "The leading statement of the meaning of battery and the “everyday contact” exception.",
+    links: []
+  },
+  {
+    id: "r-v-chan-fook-1993", name: "R v Chan-Fook", cite: "[1994] 1 WLR 689", year: 1993, court: "CA",
+    area: "criminal", topic: "cl-nonfatal", sub: "nf-abh", key: false,
+    tags: ["Psychiatric injury", "Actual bodily harm"],
+    gist: "A man accused of theft is dragged upstairs and locked in a room, and later claims he suffered a psychiatric condition.",
+    principle: "Actual bodily harm includes recognised psychiatric illness, but not mere fear, distress or panic.",
+    facts: "Chan-Fook thought another man had stolen his fiancée's jewellery. He dragged him upstairs and locked him in a room. The man was injured trying to escape and claimed psychiatric harm. The judge did not distinguish illness from mere emotion.",
+    held: "The Court of Appeal quashed the conviction. “Bodily harm” covers any hurt or injury interfering with health or comfort and includes psychiatric injury, but it does not cover fear, distress or panic that is not a clinical condition.",
+    significance: "Used with Ireland and Burstow, which confirmed it. Expert medical evidence is needed.",
+    links: ["r-v-ireland-and-r-v-burstow-1997"]
+  },
+  {
+    id: "r-v-savage-dpp-v-parmenter-1991", name: "R v Savage; DPP v Parmenter", cite: "[1992] 1 AC 699", year: 1991, court: "HL",
+    area: "criminal", topic: "cl-nonfatal", sub: "nf-gbh", key: true,
+    tags: ["Mens rea", "Section 47", "Section 20"],
+    gist: "A woman throws beer at a rival in a pub and the glass slips and cuts her. In another case, a father injures his baby while handling him roughly, without thinking he might hurt him.",
+    principle: "Section 47 needs only the mens rea for assault or battery. Section 20 requires foresight that some harm might result, not serious harm.",
+    facts: "Savage threw a pint of beer over another woman, but the glass also slipped and cut her wrist. Parmenter injured his baby while playing with him but did not realise it might cause any harm.",
+    held: "The House of Lords held that for s47 the prosecution need not prove foresight of ABH. For s20 the defendant must have foreseen that some physical harm to some person, albeit of a minor character, might result.",
+    significance: "Sets out the mens rea for ss47 and 20 and is central to evaluation of the “ladder” of non-fatal offences.",
+    links: ["r-v-chan-fook-1993"]
+  },
+  {
+    id: "jcc-v-eisenhower-1983", name: "JCC (a minor) v Eisenhower", cite: "[1984] QB 331", year: 1983, court: "DC",
+    area: "criminal", topic: "cl-nonfatal", sub: "nf-gbh", key: false,
+    tags: ["Wound", "Air gun"],
+    gist: "A boy fires an air gun pellet that hits another man's eye and causes internal bleeding but breaks no skin.",
+    principle: "A wound requires a break in the continuity of the whole skin, so internal bleeding is not a wound.",
+    facts: "A pellet from an air gun struck the victim near the eye and caused a ruptured blood vessel in the eye. The defendant was convicted of unlawful wounding under s20.",
+    held: "The Divisional Court quashed the conviction. A wound requires the break of the whole skin, not just the inner skin, so bruising and internal bleeding are not enough. It would have been a case of s20 GBH instead.",
+    significance: "Authority for the definition of a wound. Also shows the need to charge GBH rather than wounding for internal injury.",
+    links: ["r-v-savage-dpp-v-parmenter-1991"]
+  },
+  {
+    id: "oxford-v-moss-1978", name: "Oxford v Moss", cite: "(1978) 68 Cr App R 183", year: 1978, court: "DC",
+    area: "criminal", topic: "cl-property", sub: "pr-theft-ar", key: false,
+    tags: ["Property", "Confidential information"],
+    gist: "A student takes a university exam paper, copies it and puts it back, and is charged with stealing the paper.",
+    principle: "Confidential information is not property for the purposes of theft.",
+    facts: "Moss, an engineering student, took a proof of an exam paper, read it and returned it. He was charged with theft of the confidential information in it.",
+    held: "The Divisional Court upheld his acquittal. Information is not “property” under s4 Theft Act 1968. He had no intention of permanently depriving the university of the paper itself.",
+    significance: "A well-known limit on the meaning of property. Compare Kelly and Lindsay (1998) on body parts.",
+    links: []
+  },
+  {
+    id: "r-v-gomez-1992", name: "R v Gomez", cite: "[1993] AC 442", year: 1992, court: "HL",
+    area: "criminal", topic: "cl-property", sub: "pr-theft-ar", key: true,
+    tags: ["Appropriation", "Consent", "Theft Act 1968"],
+    gist: "An assistant manager persuades his manager to authorise the sale of goods in exchange for worthless cheques, which the manager does.",
+    principle: "Appropriation can occur even where the owner has consented, so consent is relevant to dishonesty rather than to appropriation.",
+    facts: "Gomez, an assistant manager, asked his manager to authorise the sale of electrical goods in exchange for two cheques he knew were stolen and worthless. The manager agreed. Gomez was convicted of theft.",
+    held: "The House of Lords upheld the conviction. Appropriation is any assumption of the rights of the owner, and it does not matter if the owner consented. The question is whether the defendant acted dishonestly.",
+    significance: "Widened theft so that obtaining by deception is also theft. It was confirmed in R v Hinks (2000), although it has been criticised for blurring theft and fraud.",
+    links: ["r-v-hinks-2000"]
+  },
+  {
+    id: "r-v-hinks-2000", name: "R v Hinks", cite: "[2000] UKHL 53", year: 2000, court: "HL",
+    area: "criminal", topic: "cl-property", sub: "pr-theft-ar", key: false,
+    tags: ["Appropriation", "Gifts", "Vulnerable victim"],
+    gist: "A woman befriends a man with a low IQ and persuades him to hand over about £60,000 as a series of gifts, and she is charged with theft.",
+    principle: "A valid gift can still be an appropriation, so theft can be made out if the defendant acted dishonestly.",
+    facts: "Hinks became friendly with a man of low intelligence and persuaded him to withdraw money and give it to her. He then gave her a TV set. She was convicted of theft of the money.",
+    held: "The House of Lords upheld the conviction by a majority. Following Gomez, appropriation does not depend on the absence of the owner's consent, so a gift can be an appropriation. Dishonesty was the issue for the jury.",
+    significance: "Extends theft to gifts. Criticised because it puts the whole weight of the offence on dishonesty and blurs civil and criminal law.",
+    links: ["r-v-gomez-1992"]
+  },
+  {
+    id: "ivey-v-genting-casinos-uk-ltd-2017", name: "Ivey v Genting Casinos (UK) Ltd", cite: "[2017] UKSC 67", year: 2017, court: "UKSC",
+    area: "criminal", topic: "cl-property", sub: "pr-theft-mr", key: true,
+    tags: ["Dishonesty", "Overruled", "Obiter", "Casino"],
+    gist: "A professional gambler wins several million pounds at baccarat using a technique that exploits flaws in the cards, and the casino refuses to pay.",
+    principle: "Dishonesty is judged by finding the defendant's actual state of mind and then applying the standards of ordinary decent people.",
+    facts: "Phil Ivey won about £7.7 million at baccarat by “edge sorting”, which relied on the casino staff turning cards in a way that revealed their pattern. The casino refused to pay out, arguing he had cheated.",
+    held: "The Supreme Court held that he had cheated. It also said that the second limb of the Ghosh test, whether the defendant realised others would regard his conduct as dishonest, was wrong. The jury should apply the objective standard of ordinary decent people.",
+    significance: "Replaced Ghosh in theory, although this part was obiter. It was applied to criminal law by R v Barton and Booth (2020).",
+    links: ["r-v-barton-and-booth-2020"]
+  },
+  {
+    id: "r-v-barton-and-booth-2020", name: "R v Barton and Booth", cite: "[2020] EWCA Crim 575", year: 2020, court: "CA",
+    area: "criminal", topic: "cl-property", sub: "pr-theft-mr", key: false,
+    tags: ["Dishonesty", "Overruled", "Vulnerable victim"],
+    gist: "The owner of a care home is convicted of dishonestly taking money from elderly residents, and argues that the old dishonesty test should have been put to the jury.",
+    principle: "The Ivey test of dishonesty applies in criminal cases, and the Ghosh test no longer represents the law.",
+    facts: "Barton owned a care home. Elderly residents gave or left her money and property. She and her associate were convicted of theft and fraud. The appeal asked which test of dishonesty applied.",
+    held: "The Court of Appeal held that the statement about Ghosh in Ivey was correct and should be followed, even though obiter. The jury should decide the defendant's state of knowledge and then whether the conduct was dishonest by objective standards.",
+    significance: "Settles that the Ivey test applies in criminal law, although the Court of Appeal has no power to overrule the House of Lords' decision in Ghosh. It said the Ivey statement was binding in effect.",
+    links: ["ivey-v-genting-casinos-uk-ltd-2017"]
+  },
+  {
+    id: "r-v-lloyd-1985", name: "R v Lloyd", cite: "[1985] QB 829", year: 1985, court: "CA",
+    area: "criminal", topic: "cl-property", sub: "pr-theft-mr", key: false,
+    tags: ["Intention to permanently deprive", "Borrowing", "Films"],
+    gist: "A cinema projectionist borrows films for a few hours so that copies can be made, and then puts them back.",
+    principle: "Borrowing is only equal to an outright taking if the item is returned having lost all its goodness or value.",
+    facts: "Lloyd, a projectionist, lent new-release films to others for a few hours so that pirate copies could be made, and then put them back. He was charged with theft.",
+    held: "The Court of Appeal quashed the conviction. s6 Theft Act 1968 requires an intention to treat the item as his own to dispose of regardless of the owner's rights, which happens only where the thing is returned in a changed state, with all its goodness gone.",
+    significance: "Narrow reading of s6, so most borrowing is not theft. Contrast with Velumyl, where cash taken was spent and replaced.",
+    links: []
+  },
+  {
+    id: "r-v-dawson-and-james-1976", name: "R v Dawson and James", cite: "(1976) 64 Cr App R 170", year: 1976, court: "CA",
+    area: "criminal", topic: "cl-property", sub: "pr-robbery", key: false,
+    tags: ["Force", "Robbery"],
+    gist: "One man nudges a victim so that he loses his balance, while the other takes his wallet.",
+    principle: "“Force” has its ordinary meaning and whether there was force is for the jury to decide.",
+    facts: "Dawson nudged the victim, who lost his balance, and James took his wallet. They were convicted of robbery. They argued that a nudge was not force.",
+    held: "The Court of Appeal upheld the conviction. “Force” is an ordinary word and does not need to be defined, and it is for the jury to decide whether it was used.",
+    significance: "Authority that even a slight use of force can be enough, as long as the jury finds it was force.",
+    links: ["r-v-hale-1978"]
+  },
+  {
+    id: "r-v-hale-1978", name: "R v Hale", cite: "(1978) 68 Cr App R 415", year: 1978, court: "CA",
+    area: "criminal", topic: "cl-property", sub: "pr-robbery", key: false,
+    tags: ["Continuing appropriation", "Robbery"],
+    gist: "A burglar steals jewellery from a house and, while upstairs, an accomplice ties up the occupant to stop her calling for help.",
+    principle: "Appropriation is a continuing act, so force used while the theft is still going on counts as robbery.",
+    facts: "Hale and another entered Mrs Carrott's house. While Hale was taking jewellery upstairs, his accomplice tied her up. They then left with the jewellery. They were convicted of robbery.",
+    held: "The Court of Appeal upheld the conviction. Appropriation is a continuing act, and the theft was not complete when the jewellery was seized but when they left. The force was used “in order to” steal.",
+    significance: "Shows that robbery can occur even if force follows the initial taking. See also R v Lockley (1995).",
+    links: ["r-v-dawson-and-james-1976"]
+  },
+  {
+    id: "r-v-collins-1972", name: "R v Collins", cite: "[1973] QB 100", year: 1972, court: "CA",
+    area: "criminal", topic: "cl-property", sub: "pr-burglary", key: false,
+    tags: ["Trespasser", "Entry", "Mens rea"],
+    gist: "A naked young man climbs a ladder to a woman's bedroom window, thinking she has invited him in, and she wakes to see him half in the window.",
+    principle: "A burglar must know he is a trespasser or be reckless as to whether he is, when he enters the building.",
+    facts: "Collins climbed a ladder to a woman's window, naked except for socks. She thought he was her boyfriend and helped him in. It was unclear whether he was inside or outside when she invited him.",
+    held: "The Court of Appeal quashed the conviction. For burglary the entry must be as a trespasser, with knowledge of or recklessness about that, and “substantial” and “effective” entry was needed.",
+    significance: "The classic case on trespass in burglary. The “substantial and effective” test was later refined in R v Ryan.",
+    links: ["r-v-jones-and-smith-1976"]
+  },
+  {
+    id: "r-v-jones-and-smith-1976", name: "R v Jones and Smith", cite: "[1976] 1 WLR 672", year: 1976, court: "CA",
+    area: "criminal", topic: "cl-property", sub: "pr-burglary", key: false,
+    tags: ["Trespasser", "Exceeding permission", "Family"],
+    gist: "A young man with permission to visit his father's house enters it and steals two televisions.",
+    principle: "A person who enters a building with permission, but in a way that goes beyond that permission, enters as a trespasser.",
+    facts: "Smith's father had told him he could come to the house at any time. Smith and Jones entered and took two television sets. They were convicted of burglary under s9(1)(a).",
+    held: "The Court of Appeal upheld the convictions. A person who enters a building for a purpose beyond the permission given is a trespasser, so Smith's entry to steal was outside his permission.",
+    significance: "Widened the idea of trespass in burglary to cover entry for a criminal purpose by someone with general permission.",
+    links: ["r-v-collins-1972"]
+  }
+);

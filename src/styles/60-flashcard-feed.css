@@ -1,0 +1,57 @@
+/* ---------- flashcard feed ---------- */
+.feedbar { display: flex; align-items: center; gap: 12px; flex: none; padding-block: 8px; background: var(--surface); border-bottom: 1px solid var(--line); width: 100%; max-width: none; }
+.feedbar .prog { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; align-items: center; }
+.feedbar #pos { font-weight: 700; font-variant-numeric: tabular-nums; font-size: .875rem; }
+.bar { width: 100%; max-width: 280px; height: 4px; background: var(--surface-2); border-radius: 2px; overflow: hidden; }
+.bar span { display: block; height: 100%; width: 0; background: var(--brass); transition: width .25s; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; flex: none; }
+.seg button { border: 0; background: var(--surface); padding: .4rem .7rem; font-size: .8125rem; font-weight: 600; min-height: 36px; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--primary); color: var(--on-primary); }
+.feedwrap { position: relative; flex: 1 1 0; min-height: 0; background: var(--feed-bg); }
+.feed { height: 100%; overflow-y: auto; scroll-snap-type: y mandatory; overscroll-behavior: contain; scrollbar-width: none; }
+.feed::-webkit-scrollbar { display: none; }
+.fc { height: 100%; scroll-snap-align: start; scroll-snap-stop: always; display: flex; justify-content: center; padding: 12px max(16px, env(safe-area-inset-left, 0px)) 12px; }
+.fc-inner { width: min(100%, 520px); display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+.fc-card { position: relative; flex: 1 1 0; min-height: 0; perspective: 1400px; cursor: pointer; border-radius: 4px; }
+.fc-flip { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .5s cubic-bezier(.2, .7, .2, 1); }
+.fc-card[data-flipped="true"] .fc-flip { transform: rotateY(180deg); }
+.fc-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: auto; background: var(--surface); border: 1px solid var(--line); outline: 1px solid var(--brass); outline-offset: -7px; border-radius: 4px; padding: 26px 24px; display: flex; flex-direction: column; gap: 10px; box-shadow: var(--shadow); }
+.fc-back { transform: rotateY(180deg); }
+.fc-front { justify-content: center; }
+.fc-crumb { font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); font-weight: 600; }
+.fc-kicker { font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--crimson); font-weight: 700; margin-top: 8px; }
+.fc-name { font: 700 clamp(1.5rem, 6vw, 2.25rem)/1.2 var(--font-display); text-wrap: balance; overflow-wrap: anywhere; hyphens: auto; }
+.fc-name.sm { font-size: clamp(1.25rem, 4.5vw, 1.6rem); }
+.fc-meta { color: var(--ink-2); font-size: .875rem; }
+.fc-scenario { font: 400 clamp(1.05rem, 3.6vw, 1.3rem)/1.55 var(--font-display); }
+.fc-prompt { color: var(--ink-2); font-size: .9375rem; margin-top: 6px; }
+.fc-hint { margin-top: auto; padding-top: 12px; color: var(--ink-2); font-size: .8125rem; display: flex; align-items: center; gap: 6px; }
+/* the story is the part to remember, so it leads; the rule is the plain follow-up (but stays bold when it is the only text, as in scenario mode) */
+.fc-story { font: 700 1.125rem/1.5 var(--font-display); }
+.fc-rule { font-size: 1rem; line-height: 1.55; }
+.fc-rule.solo { font: 700 1.125rem/1.5 var(--font-display); }
+.fc-status { align-self: flex-start; font-size: .75rem; font-weight: 700; padding: .1rem .55rem; border-radius: 999px; }
+.fc-status[data-s="got"] { background: var(--ok-soft); color: var(--ok); }
+.fc-status[data-s="again"] { background: var(--warn-soft); color: var(--warn); }
+.fc-status:empty { display: none; }
+.fc-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; flex: none; }
+.fc-actions .fc-more { grid-column: 1 / -1; min-height: 48px; font-size: .9375rem; }
+.fc-actions .btn { padding-inline: .5rem; }
+.fc-actions .btn.ok:hover { border-color: var(--ok); color: var(--ok); }
+.fc-actions .btn.again:hover { border-color: var(--warn); color: var(--warn); }
+.fc-actions .btn.on-ok { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+.fc-actions .btn.on-again { background: var(--warn-soft); border-color: var(--warn); color: var(--warn); }
+.fc-end .fc-card { cursor: default; }
+.end-box { position: absolute; inset: 0; background: var(--surface); border: 1px solid var(--line); outline: 1px solid var(--brass); outline-offset: -7px; border-radius: 4px; padding: 28px 24px; display: flex; flex-direction: column; gap: 14px; justify-content: center; overflow: auto; box-shadow: var(--shadow); }
+.end-box h2 { font: 700 1.6rem/1.2 var(--font-display); }
+.end-stats { display: flex; gap: 22px; }
+.end-stats div { display: flex; flex-direction: column; }
+.end-stats dd { font: 700 1.8rem/1.1 var(--font-display); font-variant-numeric: tabular-nums; }
+.end-stats dt { order: 2; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+.end-actions { display: flex; flex-direction: column; gap: 8px; }
+.feed-nav { position: absolute; right: max(12px, env(safe-area-inset-right, 0px)); top: 50%; transform: translateY(-50%); display: none; flex-direction: column; gap: 10px; }
+.feed-nav .icon-btn { background: var(--surface); border: 1px solid var(--line); color: var(--ink); width: 44px; height: 44px; box-shadow: var(--shadow); }
+.feed-nav .icon-btn:hover { background: var(--surface-2); }
+@media (min-width: 900px) { .feed-nav { display: flex; } }
+@media (max-width: 420px) { .feedbar #back-lbl { display: none; } .seg button { padding-inline: .5rem; } }

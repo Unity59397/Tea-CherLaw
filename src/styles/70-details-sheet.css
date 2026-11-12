@@ -1,0 +1,20 @@
+/* ---------- details sheet ---------- */
+.scrim { position: fixed; inset: 0; background: var(--scrim); z-index: 50; animation: fade .18s ease-out; }
+.sheet { position: fixed; z-index: 51; right: 0; top: 0; bottom: 0; width: min(100%, 560px); background: var(--surface); color: var(--ink); display: flex; flex-direction: column; box-shadow: var(--shadow); border-left: 3px double var(--brass); padding-top: env(safe-area-inset-top, 0px); animation: slide .22s ease-out; outline: none; }
+.sheet-head { display: flex; gap: 12px; justify-content: space-between; align-items: flex-start; padding: 18px max(20px, env(safe-area-inset-right, 0px)) 14px 20px; border-bottom: 1px solid var(--line); }
+.crumb { font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); font-weight: 600; }
+.sheet-title { font: 700 1.5rem/1.2 var(--font-display); margin: 6px 0 4px; text-wrap: balance; overflow-wrap: anywhere; }
+.sheet-meta { color: var(--ink-2); font-size: .875rem; }
+.sheet-head .icon-btn { color: var(--ink); border-color: var(--line); flex: none; }
+.sheet-head .icon-btn:hover { background: var(--surface-2); }
+.sheet-body { flex: 1; overflow: auto; padding: 18px max(20px, env(safe-area-inset-right, 0px)) 18px 20px; display: flex; flex-direction: column; gap: 18px; }
+.sheet-body p { max-width: 65ch; }
+.ruleblock { background: var(--brass-soft); border: 1px solid var(--brass); border-radius: 4px; padding: 14px 16px; }
+.ruleblock p { font: 700 1.0625rem/1.55 var(--font-display); }
+.related { display: flex; flex-direction: column; gap: 6px; }
+.related .btn { justify-content: space-between; text-align: left; }
+.sheet-foot { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px max(20px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) 20px; border-top: 1px solid var(--line); background: var(--surface); }
+@media (max-width: 640px) { .sheet { top: 12%; width: 100%; border-left: 0; border-top: 3px double var(--brass); border-radius: 12px 12px 0 0; animation-name: rise; } }
+@keyframes fade { from { opacity: 0; } }
+@keyframes slide { from { transform: translateX(24px); opacity: 0; } }
+@keyframes rise { from { transform: translateY(24px); opacity: 0; } }

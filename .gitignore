@@ -1,0 +1,7 @@
+dist/
+dist-ssr/
+node_modules/
+src/generated/
+
+.env
+.env.local

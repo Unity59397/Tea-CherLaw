@@ -1,0 +1,23 @@
+/* ---------- footer and watermark ---------- */
+.site-footer { flex: none; background: var(--surface); border-top: 3px double var(--brass); margin-top: 40px; padding-block: 22px calc(18px + env(safe-area-inset-bottom, 0px)); }
+.foot { display: flex; flex-direction: column; gap: 14px; }
+.foot-note { color: var(--ink-2); font-size: .8125rem; max-width: 75ch; }
+.foot-base { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; }
+.copy { font-size: .8125rem; color: var(--ink-2); }
+.watermark { display: inline-flex; align-items: center; gap: 8px; padding: .4rem .75rem; border: 1px dashed var(--line); border-radius: 999px; color: var(--ink-2); font-size: .8125rem; text-decoration: none; }
+.watermark svg { color: var(--brand); }
+.watermark strong { color: var(--ink); font-weight: 700; }
+.watermark:hover { border-color: var(--brand); }
+body.is-feed .site-footer, .site-footer.compact { margin-top: 0; padding-block: 6px calc(6px + env(safe-area-inset-bottom, 0px)); }
+.site-footer.compact .foot { gap: 0; }
+.site-footer.compact .foot-note { display: none; }
+.site-footer.compact .foot-base { flex-wrap: nowrap; }
+.site-footer.compact .copy, .site-footer.compact .watermark { font-size: .75rem; }
+.site-footer.compact .watermark { padding: .15rem .6rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+/* hidden must always win over component display rules */
+[hidden] { display: none !important; }

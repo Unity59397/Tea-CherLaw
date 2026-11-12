@@ -1,0 +1,6 @@
+/* ---------- footer links ---------- */
+.foot-links { display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: center; font-size: .8125rem; }
+.foot-links a, .foot-links .linklike { color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; min-height: 32px; display: inline-flex; align-items: center; }
+.foot-links a:hover, .foot-links .linklike:hover { color: var(--ink); }
+.site-footer.compact .foot-links { font-size: .75rem; }
+@media (max-width: 640px) { .site-footer.compact .foot-base { flex-wrap: wrap; } }
