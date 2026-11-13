@@ -11,7 +11,7 @@ import { useData, type Data } from '../../lib/data';
 import { copyText, shareUrl, siteUrl } from '../../lib/share';
 import { useSaved } from '../../state/saved';
 import { useUI } from '../UI';
-import { AskButton, Bar, CmsHead, ConfirmRow, ErrBox, Gate, LinkBtn, focusSoon, useCms, type CmsPage } from './common';
+import { AskButton, Bar, CmsHead, ConfirmRow, ErrBox, Gate, LinkBtn, focusSoon, hashParams, useCms, type CmsPage } from './common';
 
 const inviteText = (st: InviteState, code?: string, on?: string | null) =>
   st === 'active' ? 'Invite open · code ' + code + (on ? ' · until ' + fmtDay(on) : ' · no expiry') : st === 'expired' ? 'Invite expired' : st === 'off' ? 'Invite turned off' : 'No invite yet';
@@ -126,24 +126,38 @@ function TabProgress({ c, data, page }: { c: TeacherClass; data: Data; page: Cms
 /** homework */
 function TabHomework({ c, page }: { c: TeacherClass; page: CmsPage }) {
   const info = useCms(async () => ({ asg: await Api.assignments.list(c.id), pls: await Api.playlists.list(), stu: await Api.progress.forClass(c.id) }), [c.id]);
+  const { saved, lists } = useSaved(), data = useData();
   const [list, setList] = useState(''), [title, setTitle] = useState(''), [due, setDue] = useState(''), [note, setNote] = useState(''), [who, setWho] = useState<'all' | 'some'>('all'), [pick, setPick] = useState<string[]>([]);
   if (!info) return null;
   const { asg, pls, stu } = info;
+  /* what homework can be made from: the playlists made here, the lists on the teacher's own Saved page, and everything they have saved */
+  const known = (ids: string[]) => ids.filter(id => !data || data.by[id]);
+  const mine = lists.map(l => ({ key: 'l:' + l.id, name: l.name, n: known(l.ids).length })).filter(l => l.n);
+  const all = known(saved);
+  const first = pls.length ? 'p:' + pls[0].id : mine.length ? mine[0].key : all.length ? 's' : '';
+  const pickKey = list || first;
+  const label = (k: string) => k === 's' ? 'My saved cases' : k.startsWith('l:') ? (mine.find(l => l.key === k)?.name || 'Saved list') : (pls.find(p => 'p:' + p.id === k)?.name || 'Playlist');
   const submit = (e: FormEvent) => {
     e.preventDefault();
     void page.run(async () => {
       if (who === 'some' && !pick.length) throw new ApiError('invalid', 'Choose at least one student, or set it for the whole classroom.');
-      const p = await Api.playlists.get(list || pls[0].id);
-      await Api.assignments.create(c.id, { title: title.trim() || p.name, note, due: due || null, caseIds: p.ids, studentIds: who === 'some' ? pick : null });
+      const ids = pickKey === 's' ? all : pickKey.startsWith('l:') ? known(lists.find(l => 'l:' + l.id === pickKey)?.ids || []) : (await Api.playlists.get(pickKey.slice(2))).ids;
+      await Api.assignments.create(c.id, { title: title.trim() || label(pickKey), note, due: due || null, caseIds: ids, studentIds: who === 'some' ? pick : null });
       setTitle(''); setDue(''); setNote(''); setWho('all'); setPick([]);
     }, { ok: 'Homework set' });
   };
   return (
     <div className="cols">
-      {pls.length ? (
+      {first ? (
         <form className="panel stack" onSubmit={submit}><h2>Set homework</h2>
-          <label htmlFor="hw-list">Playlist</label><select className="txt" id="hw-list" name="list" value={list || pls[0].id} onChange={e => setList(e.target.value)}>{pls.map(p => <option key={p.id} value={p.id}>{p.name} ({plural(p.ids.length, 'case')})</option>)}</select>
-          <label htmlFor="hw-title">Title <span className="n">(optional, defaults to the playlist name)</span></label><input className="txt" id="hw-title" name="title" maxLength={60} autoComplete="off" value={title} onChange={e => setTitle(e.target.value)} />
+          <label htmlFor="hw-list">Cases to set</label>
+          <select className="txt" id="hw-list" name="list" value={pickKey} onChange={e => setList(e.target.value)}>
+            {pls.length > 0 && <optgroup label="Your playlists">{pls.map(p => <option key={p.id} value={'p:' + p.id}>{p.name} ({plural(p.ids.length, 'case')})</option>)}</optgroup>}
+            {mine.length > 0 && <optgroup label="Your saved lists">{mine.map(l => <option key={l.key} value={l.key}>{l.name} ({plural(l.n, 'case')})</option>)}</optgroup>}
+            {all.length > 0 && <optgroup label="Everything you have saved"><option value="s">All saved cases ({plural(all.length, 'case')})</option></optgroup>}
+          </select>
+          <p className="n"><Link to={{ hash: '#p=new&from=' + c.id }}>Create a new playlist</Link> to pick a different set of cases.</p>
+          <label htmlFor="hw-title">Title <span className="n">(optional, defaults to the name above)</span></label><input className="txt" id="hw-title" name="title" maxLength={60} autoComplete="off" value={title} onChange={e => setTitle(e.target.value)} />
           <label htmlFor="hw-due">Due date <span className="n">(optional)</span></label><input className="txt" type="date" id="hw-due" name="due" min={todayStr()} value={due} onChange={e => setDue(e.target.value)} />
           <label htmlFor="hw-note">Note for students <span className="n">(optional)</span></label><textarea className="txt" id="hw-note" name="note" rows={2} maxLength={300} value={note} onChange={e => setNote(e.target.value)} />
           <fieldset className="who"><legend>Who is it for?</legend>
@@ -151,10 +165,10 @@ function TabHomework({ c, page }: { c: TeacherClass; page: CmsPage }) {
             <label className="opt"><input type="radio" name="who" checked={who === 'some'} onChange={() => setWho('some')} disabled={!c.members.length} />Chosen students only</label>
             {who === 'some' && <ul className="plain who-list">{c.members.map(m => <li key={m.id}><label className="opt"><input type="checkbox" checked={pick.includes(m.id)} onChange={e => setPick(e.target.checked ? [...pick, m.id] : pick.filter(x => x !== m.id))} />{m.name}</label></li>)}</ul>}
           </fieldset>
-          <p className="n">Students get a copy of the playlist as it is now. Changing the playlist later won’t change this homework.</p>
+          <p className="n">Students get a copy of these cases as they are now. Changing the list later won’t change this homework.</p>
           <div><button type="submit" className="btn btn-primary">Set homework</button></div>
         </form>
-      ) : <div className="empty"><p><strong>Make a playlist first.</strong></p><p>Homework is a playlist of cases. <Link to={{ hash: '#p=new' }}>Create a playlist</Link>, then come back.</p></div>}
+      ) : <div className="empty"><p><strong>Make a playlist first.</strong></p><p>Homework is a set of cases. <Link to={{ hash: '#p=new&from=' + c.id }}>Create a playlist</Link>, then you will come straight back here.</p></div>}
       <section aria-labelledby="h-hwl"><h2 id="h-hwl" className="sub-h">Set homework</h2>
         {asg.length ? <div className="hw-list">{asg.map(a => {
           const aud = stu.filter(s => forStudent(a, s.id)), slots = a.caseIds.length * aud.length, got = aud.reduce((n, s) => n + a.caseIds.filter(id => s.marks[id] === 'got').length, 0), di = dueInfo(a.due, false);
@@ -244,6 +258,7 @@ function TabSettings({ c, page }: { c: TeacherClass; page: CmsPage }) {
 interface Draft { key: string; id: string | null; name: string; ids: string[] }
 export function PlaylistEditor({ pid, page, data }: { pid: string; page: CmsPage; data: Data }) {
   const { toast } = useUI(), { saved, lists } = useSaved();
+  const from = hashParams(page.hash).get('from'), back = from ? 'c=' + from + '&t=homework' : '';   // opened from a classroom's homework tab: return there afterwards
   const loaded = useCms(async () => (pid === 'new' ? { id: null as string | null, name: '', ids: [] as string[] } : Api.playlists.get(pid).catch(() => null)), [pid]);
   const [draft, setDraft] = useState<Draft | null>(null), [q, setQ] = useState(''), [src, setSrc] = useState('');
   useEffect(() => { if (loaded && (!draft || draft.key !== pid)) { setDraft({ key: pid, id: loaded.id, name: loaded.name, ids: loaded.ids.slice() }); setQ(''); } }, [loaded, pid, draft]);
@@ -261,10 +276,10 @@ export function PlaylistEditor({ pid, page, data }: { pid: string; page: CmsPage
     from.forEach(id => { if (data.by[id] && ids.indexOf(id) < 0 && ids.length < LIMITS.listCases) { ids.push(id); n++; } });
     set({ ids }); toast(n ? 'Added ' + plural(n, 'case') : 'Those cases are already in the playlist');
   };
-  const save = (e: FormEvent) => { e.preventDefault(); void page.run(async () => { await Api.playlists.save({ id: d.id, name: d.name, ids: d.ids }); return ''; }, { ok: 'Playlist saved' }); };
+  const save = (e: FormEvent) => { e.preventDefault(); void page.run(async () => { await Api.playlists.save({ id: d.id, name: d.name, ids: d.ids }); return back; }, { ok: 'Playlist saved' }); };
   const nm = (id: string) => data.by[id]?.name || id;
   return (
-    <div className="wrap cms"><BackLink /><CmsHead eyebrow="Playlist" title={d.id ? 'Edit playlist' : 'New playlist'} /><ErrBox err={page.err} />
+    <div className="wrap cms">{from ? <p className="crumb"><Link to={{ hash: '#' + back }}><Icon.back />Back to homework</Link></p> : <BackLink />}<CmsHead eyebrow="Playlist" title={d.id ? 'Edit playlist' : 'New playlist'} /><ErrBox err={page.err} />
       <form className="panel stack ed" onSubmit={save}>
         <label htmlFor="pl-name">Playlist name</label><input className="txt" id="pl-name" name="name" maxLength={60} value={d.name} onChange={e => set({ name: e.target.value })} autoComplete="off" />
         <h2 className="sub-h">Cases in this playlist <span className="n" id="pl-count">({d.ids.length})</span></h2>
@@ -281,8 +296,8 @@ export function PlaylistEditor({ pid, page, data }: { pid: string; page: CmsPage
         {saved.length || lists.length ? (
           <div className="inline-form"><label className="sr" htmlFor="pl-imp">Add from my saved cases</label><select className="txt" id="pl-imp" value={src} onChange={e => setSrc(e.target.value)}><option value="">All saved cases ({saved.length})</option>{lists.map(l => <option key={l.id} value={l.id}>Playlist: {l.name} ({l.ids.length})</option>)}</select><button type="button" className="btn btn-sm" onClick={importCases}>Add these cases</button></div>
         ) : <p className="n">Cases you bookmark on this device can be added here in one go.</p>}
-        <div className="list-actions ed-go"><button type="submit" className="btn btn-primary">Save playlist</button><Link className="btn" to={{ hash: '' }}>Cancel</Link>{d.id && <AskButton page={page} k="pdel" className="btn btn-danger"><Icon.trash />Delete</AskButton>}</div>
-        {d.id && <ConfirmRow page={page} k="pdel" text="Delete this playlist? Homework already set from it is not affected." yes="Yes, delete it" onYes={() => void page.run(async () => { await Api.playlists.remove(d.id!); return ''; }, { ok: 'Playlist deleted' })} />}
+        <div className="list-actions ed-go"><button type="submit" className="btn btn-primary">Save playlist</button><Link className="btn" to={{ hash: back ? '#' + back : '' }}>Cancel</Link>{d.id && <AskButton page={page} k="pdel" className="btn btn-danger"><Icon.trash />Delete</AskButton>}</div>
+        {d.id && <ConfirmRow page={page} k="pdel" text="Delete this playlist? Homework already set from it is not affected." yes="Yes, delete it" onYes={() => void page.run(async () => { await Api.playlists.remove(d.id!); return back; }, { ok: 'Playlist deleted' })} />}
       </form>
     </div>
   );
